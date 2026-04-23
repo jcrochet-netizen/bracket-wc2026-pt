@@ -174,7 +174,7 @@ Preencher aleatoriamente (teste)
 </div>
 
 <div id="wc-best3-section" class="wc-best3-section wc-hidden">
-<div class="wc-section-title">Melhores 3es Colocados</div>
+<div class="wc-section-title">Melhores terceiros colocados</div>
 <div class="wc-best3-info">Selecione as 8 equipes classificadas em 3º lugar que se qualificam para as oitavas <span class="wc-best3-counter" id="wc-b3-count">0 / 8</span></div>
 <div class="wc-best3-grid" id="wc-best3-grid"></div>
 </div>
@@ -239,7 +239,7 @@ ARG:{n:"Argentina",f:"ar",s:"Argentina"},ALG:{n:"Argélia",f:"dz",s:"Argélia"},
 POR:{n:"Portugal",f:"pt",s:"Portugal"},UZB:{n:"Uzbequistão",f:"uz",s:"Uzbequist."},COL:{n:"Colômbia",f:"co",s:"Colômbia"},
 ENG:{n:"Inglaterra",f:"gb-eng",s:"Inglaterra"},CRO:{n:"Croácia",f:"hr",s:"Croácia"},GHA:{n:"Gana",f:"gh",s:"Gana"},PAN:{n:"Panamá",f:"pa",s:"Panamá"},
 PLA:{n:"Bósnia e Herz.",f:"ba",s:"BOS"},PLB:{n:"Suécia",f:"se",s:"SWE"},
-PLC:{n:"Turquia",f:"tr",s:"TUR"},PLD:{n:"Rep. Tcheca",f:"cz",s:"CZE"},
+PLC:{n:"Turquia",f:"tr",s:"TUR"},PLD:{n:"Tchéquia",f:"cz",s:"CZE"},
 PL1:{n:"RD Congo",f:"cd",s:"RDC"},PL2:{n:"Iraque",f:"iq",s:"IRQ"}
 };
 
@@ -654,8 +654,8 @@ s+='<rect width="'+BW+'" height="'+BH+'" fill="white"/>';
 // Separators between match pairs
 for(var i=1;i<8;i++){var yd=i*2*SL;s+=ln(0,yd,TW,yd,'#eeeff1','');s+=ln(RTW,yd,BW,yd,'#eeeff1','');}
 // Round labels — aligned exactly over each circle column
-var rls=[[TW/2,'1/16'],[LR32,'1/8'],[LR16,'1/4'],[LQF,'1/2'],[CTR,'FINALE'],[RQF,'1/2'],[RR16,'1/4'],[RR32,'1/8'],[RTW+TW/2,'1/16']];
-rls.forEach(function(l){s+='<text x="'+l[0]+'" y="12" text-anchor="middle" font-size="9" fill="'+(l[1]==='FINALE'?'#e2b714':'#aaa')+'" font-weight="600">'+l[1]+'</text>';});
+var rls=[[TW/2,'1/16'],[LR32,'1/8'],[LR16,'1/4'],[LQF,'1/2'],[CTR,'FINAL'],[RQF,'1/2'],[RR16,'1/4'],[RR32,'1/8'],[RTW+TW/2,'1/16']];
+rls.forEach(function(l){s+='<text x="'+l[0]+'" y="12" text-anchor="middle" font-size="9" fill="'+(l[1]==='FINAL'?'#e2b714':'#aaa')+'" font-weight="600">'+l[1]+'</text>';});
 // === LEFT LINES ===
 var xJ1=136;
 for(var i=0;i<8;i++){var ya=ty(2*i),yb=ty(2*i+1),ym=r32y(i);s+=ln(TW,ya,xJ1,ya);s+=ln(TW,yb,xJ1,yb);s+=ln(xJ1,ya,xJ1,yb);s+=ln(xJ1,ym,LR32-CR,ym);}
