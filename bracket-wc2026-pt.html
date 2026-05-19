@@ -243,34 +243,34 @@ J:["ARG","ALG","AUT","JOR"],K:["POR","UZB","COL","PL1"],L:["ENG","CRO","GHA","PA
 
 /* R32 structure: position-based. 'p' = position type: '1X'=1st group X, '2X'=2nd, '3X'=3rd slot */
 var R32_STRUCT={
-49:{d:'1A vs 3º',pa:'1A',pb:'3',pbSlot:0},
-50:{d:'1B vs 3º',pa:'1B',pb:'3',pbSlot:1},
-51:{d:'2E vs 2F',pa:'2E',pb:'2F'},
-52:{d:'1C vs 3º',pa:'1C',pb:'3',pbSlot:2},
-53:{d:'1D vs 3º',pa:'1D',pb:'3',pbSlot:3},
-54:{d:'2A vs 2B',pa:'2A',pb:'2B'},
-55:{d:'1E vs 2D',pa:'1E',pb:'2D'},
-56:{d:'1F vs 2C',pa:'1F',pb:'2C'},
-57:{d:'1G vs 3º',pa:'1G',pb:'3',pbSlot:4},
-58:{d:'1H vs 3º',pa:'1H',pb:'3',pbSlot:5},
-59:{d:'2K vs 2L',pa:'2K',pb:'2L'},
-60:{d:'1I vs 3º',pa:'1I',pb:'3',pbSlot:6},
-61:{d:'1J vs 3º',pa:'1J',pb:'3',pbSlot:7},
-62:{d:'2G vs 2H',pa:'2G',pb:'2H'},
-63:{d:'1K vs 2J',pa:'1K',pb:'2J'},
-64:{d:'1L vs 2I',pa:'1L',pb:'2I'}
+49:{d:'1E vs 3º',pa:'1E',pb:'3',pbSlot:0},
+50:{d:'1I vs 3º',pa:'1I',pb:'3',pbSlot:1},
+51:{d:'2A vs 2B',pa:'2A',pb:'2B'},
+52:{d:'1F vs 2C',pa:'1F',pb:'2C'},
+53:{d:'2K vs 2L',pa:'2K',pb:'2L'},
+54:{d:'1H vs 2J',pa:'1H',pb:'2J'},
+55:{d:'1D vs 3º',pa:'1D',pb:'3',pbSlot:2},
+56:{d:'1G vs 3º',pa:'1G',pb:'3',pbSlot:3},
+57:{d:'1C vs 2F',pa:'1C',pb:'2F'},
+58:{d:'2E vs 2I',pa:'2E',pb:'2I'},
+59:{d:'1A vs 3º',pa:'1A',pb:'3',pbSlot:4},
+60:{d:'1L vs 3º',pa:'1L',pb:'3',pbSlot:5},
+61:{d:'1J vs 2H',pa:'1J',pb:'2H'},
+62:{d:'2D vs 2G',pa:'2D',pb:'2G'},
+63:{d:'1B vs 3º',pa:'1B',pb:'3',pbSlot:6},
+64:{d:'1K vs 3º',pa:'1K',pb:'3',pbSlot:7}
 };
 
-/* 3rd place slot eligibility: 3rd can face any group winner except their own group */
+/* 3rd place slot eligibility: official FIFA WC 2026 rules */
 var THIRD_ELIGIBLE=[
-['B','C','D','E','F','G','H','I','J','K','L'],  // slot 0 → M49 (vs 1A, not A)
-['A','C','D','E','F','G','H','I','J','K','L'],  // slot 1 → M50 (vs 1B, not B)
-['A','B','D','E','F','G','H','I','J','K','L'],  // slot 2 → M52 (vs 1C, not C)
-['A','B','C','E','F','G','H','I','J','K','L'],  // slot 3 → M53 (vs 1D, not D)
-['A','B','C','D','E','F','H','I','J','K','L'],  // slot 4 → M57 (vs 1G, not G)
-['A','B','C','D','E','F','G','I','J','K','L'],  // slot 5 → M58 (vs 1H, not H)
-['A','B','C','D','E','F','G','H','J','K','L'],  // slot 6 → M60 (vs 1I, not I)
-['A','B','C','D','E','F','G','H','I','K','L']   // slot 7 → M61 (vs 1J, not J)
+['A','B','C','D','F'],          // slot 0 → M49 (vs 1E)
+['C','D','F','G','H'],          // slot 1 → M50 (vs 1I)
+['B','E','F','I','J'],          // slot 2 → M55 (vs 1D)
+['A','E','H','I','J'],          // slot 3 → M56 (vs 1G)
+['C','E','F','H','I'],          // slot 4 → M59 (vs 1A)
+['E','H','I','J','K'],          // slot 5 → M60 (vs 1L)
+['E','F','G','I','J'],          // slot 6 → M63 (vs 1B)
+['D','E','I','J','L']           // slot 7 → M64 (vs 1K)
 ];
 
 /* Later rounds feed structure */
