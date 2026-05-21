@@ -261,16 +261,27 @@ var R32_STRUCT={
 64:{d:'1K vs 3º',pa:'1K',pb:'3',pbSlot:7}
 };
 
-/* 3rd place slot eligibility: official FIFA WC 2026 rules */
+/* 3rd place slot eligibility: top 4 probabilidades em 495 combinações oficiais FIFA */
 var THIRD_ELIGIBLE=[
-['A','B','C','D','F'],          // slot 0 → M49 (vs 1E)
-['C','D','F','G','H'],          // slot 1 → M50 (vs 1I)
-['B','E','F','I','J'],          // slot 2 → M55 (vs 1D)
-['A','E','H','I','J'],          // slot 3 → M56 (vs 1G)
-['C','E','F','H','I'],          // slot 4 → M59 (vs 1A)
-['E','H','I','J','K'],          // slot 5 → M60 (vs 1L)
-['E','F','G','I','J'],          // slot 6 → M63 (vs 1B)
-['D','E','I','J','L']           // slot 7 → M64 (vs 1K)
+['A','C','D','F'],          // slot 0 → M49 (vs 1E) — 3C 46.7%, 3D 42.8%, 3F 7.1%, 3A 3.2%
+['D','F','G','H'],          // slot 1 → M50 (vs 1I) — 3F 55.8%, 3D 20.0%, 3G 14.1%, 3H 9.7%
+['B','E','I','J'],          // slot 2 → M55 (vs 1D) — 3B 66.5%, 3J 12.9%, 3I 10.5%, 3E 7.9%
+['A','H','I','J'],          // slot 3 → M56 (vs 1G) — 3A 63.4%, 3H 17.2%, 3J 9.9%, 3I 8.3%
+['C','E','H','I'],          // slot 4 → M59 (vs 1A) — 3H 39.2%, 3E 36.8%, 3C 19.6%, 3I 3.8%
+['E','I','J','K'],          // slot 5 → M60 (vs 1L) — 3K 66.7%, 3I 22.8%, 3E 5.9%, 3J 4.0%
+['E','G','I','J'],          // slot 6 → M63 (vs 1B) — 3G 52.5%, 3J 38.4%, 3E 5.3%, 3I 2.8%
+['D','E','I','L']           // slot 7 → M64 (vs 1K) — 3L 66.7%, 3I 18.4%, 3E 9.7%, 3D 3.8%
+];
+/* Pesos de probabilidade por slot (frequências em 495 combinações FIFA) */
+var THIRD_WEIGHTS=[
+{A:3.2, C:46.7,D:42.8,F:7.1},    // slot 0 → M49 (vs 1E)
+{D:20.0,F:55.8,G:14.1,H:9.7},    // slot 1 → M50 (vs 1I)
+{B:66.5,E:7.9, I:10.5,J:12.9},   // slot 2 → M55 (vs 1D)
+{A:63.4,H:17.2,I:8.3, J:9.9},    // slot 3 → M56 (vs 1G)
+{C:19.6,E:36.8,H:39.2,I:3.8},    // slot 4 → M59 (vs 1A)
+{E:5.9, I:22.8,J:4.0, K:66.7},   // slot 5 → M60 (vs 1L)
+{E:5.3, G:52.5,I:2.8, J:38.4},   // slot 6 → M63 (vs 1B)
+{D:3.8, E:9.7, I:18.4,L:66.7}    // slot 7 → M64 (vs 1K)
 ];
 
 /* Later rounds feed structure */
@@ -338,20 +349,29 @@ var selected=[];
 for(var k in best3) if(best3[k]) selected.push(k);
 selected.sort();
 if(selected.length!==8) return false;
-// Backtracking allocation
 var assignment=new Array(8);
+// Ordenação aleatória ponderada — amostragem Gumbel-max (Efraimidis-Spirakis)
+// Score = U^(1/w): grupos com maior probabilidade ficam em primeiro
+function wOrder(candidates,wmap){
+  return candidates.map(function(g){
+    return{g:g,s:Math.pow(Math.random(),1/(wmap[g]||1))};
+  }).sort(function(a,b){return b.s-a.s;}).map(function(x){return x.g;});
+}
 function solve(idx){
 if(idx===8) return true;
 var eligible=THIRD_ELIGIBLE[idx];
+var candidates=[];
 for(var i=0;i<selected.length;i++){
-var grp=selected[i];
-if(eligible.indexOf(grp)===-1) continue;
-// Check not already assigned
-var used=false;
-for(var j=0;j<idx;j++) if(assignment[j]===grp){used=true;break;}
-if(used) continue;
-assignment[idx]=grp;
-if(solve(idx+1)) return true;
+  var grp=selected[i];
+  if(eligible.indexOf(grp)===-1) continue;
+  var used=false;
+  for(var j=0;j<idx;j++) if(assignment[j]===grp){used=true;break;}
+  if(!used) candidates.push(grp);
+}
+var ordered=wOrder(candidates,THIRD_WEIGHTS[idx]);
+for(var i=0;i<ordered.length;i++){
+  assignment[idx]=ordered[i];
+  if(solve(idx+1)) return true;
 }
 assignment[idx]=undefined;
 return false;
